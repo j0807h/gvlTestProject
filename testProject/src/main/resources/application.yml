@@ -1,0 +1,4 @@
+mybatis:
+  config-location: classpath:mybatis-config.xml  //혹시 오류가 난다면 여기 부분 제거
+  configuration:
+    map-underscore-to-camel-case: true

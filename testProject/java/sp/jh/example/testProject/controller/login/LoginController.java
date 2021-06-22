@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import sp.jh.example.testProject.command.LoginCommand;
 import sp.jh.example.testProject.command.SignUpCommand;
+import sp.jh.example.testProject.domain.AuthInfo;
 import sp.jh.example.testProject.service.login.LoginService;
 import sp.jh.example.testProject.service.login.SignUpService;
 
@@ -31,13 +32,14 @@ public class LoginController {
 	LoginService loginService;
 	@Autowired
 	SignUpService signUpService;
+	AuthInfo authInfo;	
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login() {
 		return "login/login";
 	}
 	@RequestMapping(value = "loginAct", method = RequestMethod.POST)
-	public String loginAct(@Validated LoginCommand loginCommand, BindingResult result, HttpSession session, Model model) {
+	public String loginAct(@Validated LoginCommand loginCommand, BindingResult result, HttpSession session, Model model) throws Exception {
 		if(result.hasErrors()) {
 			return "login/login";
 		}
@@ -56,8 +58,8 @@ public class LoginController {
 	@RequestMapping(value="signUpAct", method = RequestMethod.POST)
 	public String signUpAct(@Validated SignUpCommand signUpCommand, BindingResult result, Model model) throws Exception {
 		if(result.hasErrors()) {
-			System.out.println("로그인 에러에러");
-			return "login/signUp";
+			System.out.println("가입 에러에러");
+			return "redirect:signUp";
 		}
 		String path = signUpService.registUser(signUpCommand, model);
 		return path;

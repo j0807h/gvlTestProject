@@ -13,17 +13,17 @@
 		    frm.userId.focus();
 		    return false;
 		  }
-		if(frm.userPw.value == "") {
+		else if(frm.userPw.value == "") {
 		    alert("비밀번호를 입력해 주세요.");
 		    frm.userPw.focus();
 		    return false;
 		  }
-		if(frm.userPwCon.value == "") {
+		else if(frm.userPwCon.value == "") {
 		    alert("비밀번호 확인을 입력해 주세요.");
 		    frm.userPwCon.focus();
 		    return false;
 		  }
-		if(frm.userName.value == "") {
+		else if(frm.userName.value == "") {
 		    alert("이름를 입력해 주세요.");
 		    frm.userName.focus();
 		    return false;
@@ -50,27 +50,30 @@
 	<!-- 	내용 -->
 	<section>
 			<div id="SignUpWrapper">
-				<form:form action="loginAct" method="post" name="frm" onsubmit="return valChk()">
+				<form:form action="signUpAct" method="post" name="frm" onsubmit="return valChk()" modelAttribute="signUpCommand">
 					<table>
 						<tr>
 							<th>아이디</th>
-							<td><input type="text" id="userId" /></td>
+							<td><form:input path="userId" placeholder="아이디"/></td>
+							
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><input type="password" id="userPw" /></td>
+							<td><input type="password" id="userPw" name="userPw" placeholder="비밀번호" />
+								${notEqual }
+							</td>
 						</tr>
 						<tr>
 							<th>비밀번호 확인</th>
-							<td><input type="password" id="userPwCon" /></td>
+							<td><input type="password" id="userPwCon" name="userPwCon" placeholder="비밀번호 확인" /></td>
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td><input type="text" id="name" /></td>
+							<td><form:input path="name" placeholder="이름" /></td>
 						</tr>
 						<tr>
 							<th colspan="2">
-								<input type="button" onclick="javascript:location.back();" value="뒤로가기" />&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" onclick="javascript:history.back();" value="뒤로가기" />&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="submit" value="제출" />&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="reset" value="다시작성" />&nbsp;&nbsp;&nbsp;&nbsp;
 							</th>

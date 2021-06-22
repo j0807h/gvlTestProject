@@ -24,6 +24,12 @@ public class SignUpCommand {
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
+	public String getUserPwCon() {
+		return userPwCon;
+	}
+	public void setUserPwCon(String userPwCon) {
+		this.userPwCon = userPwCon;
+	}
 	public String getName() {
 		return name;
 	}

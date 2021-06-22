@@ -1,6 +1,7 @@
 package sp.jh.example.testProject.service.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,6 +17,9 @@ public class SignUpService {
 	@Autowired
 	LoginMapper loginMapper;
 	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public String registUser(SignUpCommand signUpCommand, Model model) throws Exception {
 		String path ="";
 		if(!signUpCommand.isEqualPw()) {
@@ -25,7 +29,8 @@ public class SignUpService {
 		
 		LoginDTO dto = new LoginDTO();
 		dto.setUserId(signUpCommand.getUserId());
-		dto.setUserPw(signUpCommand.getUserPw());
+		String Pw = bCryptPasswordEncoder.encode(signUpCommand.getUserPw());
+		dto.setUserPw(Pw);
 		dto.setName(signUpCommand.getName());
 		Integer user = loginMapper.registUsers(dto);
 		
