@@ -19,12 +19,14 @@ public class BoardListService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public void getList(Integer page, Model model) {
+	public void getList(Integer page, Model model) throws Exception {
 		//페이징
-		int limit = 10; //한 페이지에 나오게 할 리스트
+		int limit = 3; //한 페이지에 나오게 할 리스트
 		int limitPage = 10; //마지막 리스트 번호
 		Long StartRow = ((long)page - 1) * limit + 1; //시작 행 1, 11, 21, 31, ...
 		Long endRow = (long)page * limit;
+		model.addAttribute("limit",limit);
+		
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setStartEndPageDTO(new StartEndPageDTO(StartRow, endRow));
@@ -36,7 +38,7 @@ public class BoardListService {
 		 * 
 		 *  --> libDTO.setStartEndPageDTO(new StartEndPageDTO(StartRow, endRow));
 		 *  */
-		System.out.println("StartEndPageDTO : " + dto.getStartEndPageDTO().getStartPage()); /* 위에서 StartRow, endRow를 넣은 값을 set했기 때문에 그걸 가져옴 */
+//		System.out.println("StartEndPageDTO : " + dto.getStartEndPageDTO().getStartPage()); /* 위에서 StartRow, endRow를 넣은 값을 set했기 때문에 그걸 가져옴 */
 		
 		dto.setBoardNum(boardMapper.getCode());
 		List<BoardDTO> list= boardMapper.getBoardList(dto);
@@ -47,7 +49,7 @@ public class BoardListService {
 		
 		//페이징
 		PageAction pageAction = new PageAction();
-		pageAction.page(model, count, limit, page, limitPage, "libBoard?");
+		pageAction.page(model, count, limit, page, limitPage, "boardList?");
 		
 		
 	}

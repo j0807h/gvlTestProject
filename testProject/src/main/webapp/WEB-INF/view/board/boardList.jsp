@@ -25,6 +25,7 @@
 				<!-- 				로그인 됐을 때 -->
 				<c:if test="${!empty authInfo }">
 					<li>${name }님반갑습니다.</li>
+					<li><a href="logout" >로그아웃</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -32,38 +33,52 @@
 	<!-- 	메뉴선택바 끝 -->
 	<!-- 	내용 -->
 	<section>
-		<form action="writeBoard" method="get" name="frm">
+		<form action="writeBoard" method="get" name="frm" >
 			<c:if test="${count > 0 }">
-					자료실 게시판  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 글 개수 : ${count } <hr />
-					
-					번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					제목   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					작성자   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					등록일   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					조회수   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr />
-<%-- 				<c:forEach items="${lists }" var="dto" varStatus="status"> --%>
-<%-- 					${status.count } &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; --%>
-<%-- 					<a href="libDetail?boardNum=${dto.boardNum }">${dto.boardSubject }</a> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; --%>
-<%-- 					${dto.boardWriter } &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --%>
-<%-- 					${dto.boardRegist } &nbsp;&nbsp;&nbsp;&nbsp; --%>
-<%-- 					${dto.boardCount } &nbsp;&nbsp;&nbsp;&nbsp; --%>
-<!-- 					<hr /> -->
-<%-- 				</c:forEach> --%>
-				<%@ include file="../include/includePage.jsp"%><br />
+				<table border="1" width="800">
+					<colgroup>
+						<col width="50" />
+						<col width="380" />
+						<col width="100" />
+						<col width="100" />
+						<col width="70" />
+					</colgroup>
+<!-- 					<div> -->
+<%-- 						<p>글 개수 : ${count }</p> --%>
+<!-- 					</div> -->
+					<tr>
+						<th colspan="5" align="right">글 개수 : ${count } </th>
+					</tr>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>등록일</th>
+						<th>조회수</th>
+					</tr>
+					<c:forEach items="${lists }" var="dto" varStatus="status">
+						<tr>
+							<td>${(page - 1) * limit + status.count }</td>
+							<td><a href="boardDetail/${dto.boardNum }">${dto.boardSubject }</a></td>
+							<td>${dto.boardWriter }</td>
+							<td>${fn:substring(dto.boardRegist,0,10) }</td>
+							<td>${dto.boardCount }</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</c:if>
-			<hr />
+			<div>
+				<%@ include file="../include/includePage.jsp"%><br />
+			</div>	
 			<c:if test="${count <= 0 }">
 				게시글 없음<br />
 			</c:if>
-			<a href="writeBoard">게시글 등록</a>
-			<%@ include file="../include/includePage.jsp"%><br />
 			<c:if test="${!empty authInfo }">
 				<input type="submit" value="게시글 등록" />
 			</c:if>
 		</form>
 	</section>
 	<!-- 	내용 끝 -->
-
 
 
 </body>

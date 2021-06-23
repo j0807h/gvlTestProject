@@ -25,7 +25,7 @@ public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public void registBoard(BoardCommand boardCommand, BindingResult result, HttpServletRequest request) {
+	public void registBoard(BoardCommand boardCommand, BindingResult result, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
@@ -34,7 +34,7 @@ public class BoardService {
 		Integer boardNum = boardMapper.getCode(); 
 
 		//조회수
-		Integer count = boardMapper.count(); 
+//		Integer count = boardMapper.count(); 
 		
 		
 		BoardDTO dto = new BoardDTO();
@@ -44,7 +44,7 @@ public class BoardService {
 		dto.setBoardContent(boardCommand.getBoardContent());
 		dto.setBoardSubject(boardCommand.getBoardSubject());
 		dto.setUserId(authInfo.getId());
-		dto.setBoardCount(String.valueOf(count));
+//		dto.setBoardCount(boardCommand.getboardC));
 		// 등록할 때 사용한 ip주소  
 		dto.setIpAddr(request.getRemoteAddr());
 		

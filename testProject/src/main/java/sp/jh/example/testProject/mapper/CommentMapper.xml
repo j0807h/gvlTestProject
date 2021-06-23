@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sp.jh.example.testProject.mapper.CommentMapper">
+	<sql id="col">
+	co_num,	board_num, co_content, co_writer, co_reg	
+	</sql>
+	
+	<insert id="insertComment">
+		insert into comment ( <include refid="col" /> )
+		values( #{coNum},#{boardNum},#{coContent},#{coWriter},now() );
+	</insert>
+
+</mapper>

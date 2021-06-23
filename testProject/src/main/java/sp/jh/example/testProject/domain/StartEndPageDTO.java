@@ -5,7 +5,7 @@ public class StartEndPageDTO {
 	Long endPage;
 	public StartEndPageDTO(Long startPage, Long endPage) {
 		super();
-		this.startPage = startPage;
+		this.startPage = startPage-1;
 		this.endPage = endPage;
 	}
 	public Long getStartPage() {
