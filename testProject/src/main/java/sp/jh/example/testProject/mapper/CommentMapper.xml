@@ -5,10 +5,17 @@
 	<sql id="col">
 	co_num,	board_num, co_content, co_writer, co_reg	
 	</sql>
-	
-	<insert id="insertComment">
+	<select id="getCoNum" resultType="int" >
+		SELECT COUNT(*)+1 FROM comment
+	</select>
+	<insert id="insertComment" parameterType="sp.jh.example.testProject.domain.CommentDTO">
 		insert into comment ( <include refid="col" /> )
-		values( #{coNum},#{boardNum},#{coContent},#{coWriter},now() );
+		values( #{coNum},#{boardNum},#{coContent},#{coWriter},sysdate() )
 	</insert>
+	<select id="getCommentList" parameterType="sp.jh.example.testProject.domain.CommentDTO" resultType="sp.jh.example.testProject.domain.CommentDTO">
+		select <include refid="col" />
+		from comment
+		where board_num = #{boardNum}
+	</select>
 
 </mapper>
