@@ -15,7 +15,11 @@
 	<select id="getCommentList" parameterType="sp.jh.example.testProject.domain.CommentDTO" resultType="sp.jh.example.testProject.domain.CommentDTO">
 		select <include refid="col" />
 		from comment
-		where board_num = #{boardNum}
+<!-- 		where board_num = #{boardNum} -->
 	</select>
 
+
+	<delete id="commentDelete" parameterType="int">
+		delete from comment where co_num = #{coNum}
+	</delete>
 </mapper>

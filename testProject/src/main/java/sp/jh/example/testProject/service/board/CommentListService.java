@@ -26,12 +26,8 @@ public class CommentListService {
 	@Autowired
 	CommentMapper commentMapper;
 
-	public void getCommentList(CommentCommand commentCommand, Model model) throws Exception {
-		CommentDTO dto = new CommentDTO();
-		dto.setBoardNum(commentCommand.getBoardNum());
-		List<CommentDTO> list = commentMapper.getCommentList(dto);
-		model.addAttribute("list",list);
-		
+	public List<CommentDTO> getCommentList() throws Exception {
+		return commentMapper.getCommentList();
 	}
 	
 //	public ResponseEntity<String> registComment(CommentCommand commentCommand, HttpServletRequest request) throws Exception {

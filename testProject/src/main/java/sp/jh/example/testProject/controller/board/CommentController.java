@@ -1,19 +1,24 @@
 package sp.jh.example.testProject.controller.board;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sp.jh.example.testProject.command.CommentCommand;
 import sp.jh.example.testProject.domain.AuthInfo;
 import sp.jh.example.testProject.domain.CommentDTO;
 import sp.jh.example.testProject.service.board.CommentListService;
+import sp.jh.example.testProject.service.comment.CommentDelService;
 import sp.jh.example.testProject.service.comment.CommentService;
 
 @Controller
@@ -26,6 +31,8 @@ public class CommentController {
 	CommentService commentService;
 	@Autowired
 	CommentListService commentListService;
+	@Autowired
+	CommentDelService commentDelService;
 	
 	
 	//댓글 등록(Ajax)
@@ -46,20 +53,22 @@ public class CommentController {
 
 
 	
+	
+	// 댓글 불러오기(Ajax)
 	@RequestMapping(value="commentList")
-	public String commentList(@ModelAttribute("commentCommand")CommentCommand commentCommand, Model model) throws Exception {
-		commentListService.getCommentList(commentCommand, model);
-		String boardNum = String.valueOf(commentCommand.getBoardNum());
-		return "redirect:/boardDetail/{boardNum}";
+	@ResponseBody
+	public List<CommentDTO> commentList(Model model) throws Exception {
+//		commentListService.getCommentList();
+//		String boardNum = String.valueOf(commentCommand.getBoardNum());
+		return commentListService.getCommentList();
 	}
 	
-	//댓글 불러오기(Ajax)
-//	@RequestMapping(value="commentList",  produces="application/json; charset=utf8")
-//	@ResponseBody
-//	public ResponseEntity ajax_commentList(@ModelAttribute("commentCommand")CommentCommand commentCommand, HttpServletRequest request ) throws Exception {
-//		
-//		return	commentListService.registComment(commentCommand, request);
-//		return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
-//	}
+	
+	//댓글 삭제(Ajax)
+	@RequestMapping(value="delete/{coNum}")
+	@ResponseBody
+	public int commentDelete(@PathVariable(value="coNum") int coNum) throws Exception {
+		return commentDelService.commentDelete(coNum);
+	}
 	
 }

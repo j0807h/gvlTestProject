@@ -18,6 +18,8 @@ public interface CommentMapper {
 	public int getCoNum()throws Exception;
 
 	//해당 게시글 댓글 리스트 가져오기
-	public List<CommentDTO> getCommentList(CommentDTO dto) throws Exception;
+	public List<CommentDTO> getCommentList() throws Exception;
+
+	public int commentDelete(int coNum) throws Exception;
 
 }

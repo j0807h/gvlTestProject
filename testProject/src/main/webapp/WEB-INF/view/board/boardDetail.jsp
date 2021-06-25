@@ -62,7 +62,7 @@
 					</tr>
 					<tr>
 						<th>파일</th>
-						<td>${board.boardFile }</td>
+						<td><a href="#fileDownload">${board.boardFile }</a></td>
 					</tr>
 					<tr>
 						<th>IP 주소</th>
