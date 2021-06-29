@@ -45,6 +45,7 @@ public class LoginController {
 		}
 		String location = loginService.login(loginCommand, session, model);
 		return location;
+//		return "redirect:/";
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {

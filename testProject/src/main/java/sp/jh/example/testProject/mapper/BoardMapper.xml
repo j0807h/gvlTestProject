@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sp.jh.example.testProject.mapper.BoardMapper">
 <sql id="column">
-	board_num,USER_ID, BOARD_WRITER, BOARD_SUBJECT, BOARD_CONTENT, BOARD_COUNT, IP_ADDR, BOARD_FILE, BOARD_REGIST
+	board_num,USER_ID, user_id, BOARD_SUBJECT, BOARD_CONTENT, BOARD_COUNT, IP_ADDR, org_File_Name, BOARD_REGIST
 </sql>
 <select id="getCode" resultType="int" parameterType="sp.jh.example.testProject.domain.BoardDTO">
 	SELECT count(*)+1 from board

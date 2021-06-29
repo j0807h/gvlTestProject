@@ -9,7 +9,7 @@
 	WHERE user_id = #{userId}
 </select>
 <insert id="registUsers" parameterType="sp.jh.example.testProject.domain.LoginDTO">
-	insert into user (user_id, user_pw, name)
-	values(#{userId},#{userPw},#{name})
+	insert into user (user_id, user_pw, name, regdate, use)
+	values(#{userId},#{userPw},#{name}, sysdate(), '1')
 </insert>
 </mapper>
